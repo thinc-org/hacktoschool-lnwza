@@ -1,38 +1,73 @@
-# hack to school
+# Turborepo starter
 
-Welcome everyone to hack to school hackathon! Today, we will be putting the skills that we've learned in the past event, the 10 Days Project, to work by collaborating with your team and tackling some challenges together.
+This is an official pnpm starter turborepo.
 
-This event is designed to help you improve your coding skills and work more effectively as a team. You should update your work with your team, communicating with other members, and using your competitive spirit to push yourselves out of your comfort zones and take on more difficult tasks.
+## What's inside?
 
-Remember, the goal is not to be perfect, but to learn and grow as a team. So let's get started and see what we can accomplish together!
+This turborepo uses [pnpm](https://pnpm.io) as a package manager. It includes the following packages/apps:
 
-## Rules
+### Apps and Packages
 
-1. We provide you with two types of requirements: "Must Done" and "Optional".
-  - "Must Done" requirements are essential and are designed for everyone. They are generally easier and have a significant score value.
-  - "Optional" requirements are optional. The score value varies from low to very high. You should aim to score as much as possible, as this can help you win. It is important to plan wisely before deciding which requirements to complete.
-2. Your final commit must be made before **13 Jan 23:59**.
-3. Please do not allow anyone outside of your team to work on your behalf.
-4. If you have any questions, feel free to ask our staff in the Thinc. Discord.
+- `docs`: a [Next.js](https://nextjs.org/) app
+- `web`: another [Next.js](https://nextjs.org/) app
+- `ui`: a stub React component library shared by both `web` and `docs` applications
+- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
+- `tsconfig`: `tsconfig.json`s used throughout the monorepo
 
-## Resources
-| Resource | |
-| --- | --- |
-| Rubric | https://docs.google.com/spreadsheets/d/1lV1BqhKLklh9ixCBJ2WjzpVy1AR2j49v53-0WT49_8E |
-| Feature Roadmap | https://www.figma.com/file/wYrSP9zjycwSfLubK76zSf/Roadmap |
-| Design | https://www.figma.com/file/VzZKRoYAurw0XhgNuzrHwa/E-Learning-Platform-(Community) |
-| Handbook | https://docs.google.com/document/d/1AkiNZzshcbYGiRp3mD0PCXUHWG6WtaOmzJMd6YfZj6Q |
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
-Note: The design in Figma is only for the landing page. For other features, you can design them on your own and use the provided Figma design as a reference.
+### Utilities
 
+This turborepo has some additional tools already setup for you:
 
-<h3 align="center">
-Sponsored By
-</h3>
+- [TypeScript](https://www.typescriptlang.org/) for static type checking
+- [ESLint](https://eslint.org/) for code linting
+- [Prettier](https://prettier.io) for code formatting
 
-<p align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://i.imgur.com/okdL4l1_d.webp?maxwidth=300&fidelity=grand">
-  <img alt="Text changing depending on mode. Light: 'So light!' Dark: 'So dark!'" src="https://i.imgur.com/FbC33zA_d.webp?maxwidth=300&fidelity=grand">
-</picture>
-<p>
+### Build
+
+To build all apps and packages, run the following command:
+
+```
+cd my-turborepo
+pnpm run build
+```
+
+### Develop
+
+To develop all apps and packages, run the following command:
+
+```
+cd my-turborepo
+pnpm run dev
+```
+
+### Remote Caching
+
+Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+
+By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+
+```
+cd my-turborepo
+pnpm dlx turbo login
+```
+
+This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+
+Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your turborepo:
+
+```
+pnpm dlx turbo link
+```
+
+## Useful Links
+
+Learn more about the power of Turborepo:
+
+- [Pipelines](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
+- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
+- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
+- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
+- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
+- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
