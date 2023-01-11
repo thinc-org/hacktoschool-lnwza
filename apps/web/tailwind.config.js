@@ -14,7 +14,7 @@ module.exports = {
 				'gt-grey-light': '#F6F5F4',
 				'gt-grey-medium': '#E0E0E0',
 				'gt-grey-icon': '#BABABA',
-				'gt-grey-dark': '#585858',
+				'gt-grey-dark': '#757575',
 				'gt-cyan': '#5996A5',
 				'gt-green': '#639B6D',
 				'gt-pink': '#A15993',
@@ -24,7 +24,6 @@ module.exports = {
 			},
 			fontFamily: {
 				header: ['var(--font-dela-gothic-one)'],
-				body: ['var(--font-montserrat)'],
 			},
 			fontSize: {
 				h1: ['3.5rem', '3.5rem'],
@@ -39,6 +38,16 @@ module.exports = {
 				bt2: ['1rem', '1rem'],
 				l1: ['1rem', '1.25rem'],
 				l2: ['0.875rem', '1.25rem'],
+			},
+			keyframes: {
+				'open-menu': {
+					'0%': { transform: 'scaleY(0)' },
+					'80%': { transform: 'scaleY(1.2)' },
+					'100%': { transform: 'scaleY(1)' },
+				},
+			},
+			animation: {
+				'open-menu': 'open-menu 0.5s ease-in-out forwards',
 			},
 		},
 	},
