@@ -30,7 +30,10 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 				{`
 					:root {
 						--font-dela-gothic-one: ${delaGothicOne.style.fontFamily};
-						--font-montserrat: ${montserrat.style.fontFamily};
+					}
+
+					html {
+						font-family: ${montserrat.style.fontFamily};
 					}
 				`}
 			</style>
