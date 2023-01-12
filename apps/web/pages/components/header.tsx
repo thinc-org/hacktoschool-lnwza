@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Header() {
@@ -32,17 +33,26 @@ export default function Header() {
 					</button>
 				</div>
 				<ul className="w-1/3 flex justify-center relative text-gt-grey-dark font-semibold tracking-tight gap-8 md:w-fit">
-					<li className="font-header text-black font-normal">GlobalTalk</li>
+					<li className="font-header text-black font-normal cursor-pointer">
+						<Link href="/">GlobalTalk</Link>
+					</li>
 					<li className="hidden md:flex items-center text-gt-grey-dark font-normal">
 						|
 					</li>
-					<li className="hidden md:flex text-black">Home</li>
-					<li className="hidden md:flex">Guide</li>
-					<li className="hidden md:flex">Statistics</li>
-					<li className="hidden md:flex items-center">
-						Games{' '}
-						<i className="border-r-2 border-b-2 border-gt-grey-dark p-0.5 rotate-45 flex w-0 h-0 ml-2"></i>
+					<li className="hidden md:flex text-black cursor-pointer">
+						<Link href="/">Home</Link>
 					</li>
+					<li className="hidden md:flex">
+						<Link href="#">Courses</Link>
+					</li>
+					{/* TODO: add features */}
+					{/* <li className="hidden md:flex">
+						<Link href="#">Feature B</Link>
+					</li>
+					<li className="hidden md:flex items-center">
+						<Link href="/">Feature C </Link>
+						<i className="border-r-2 border-b-2 border-gt-grey-dark p-0.5 rotate-45 flex w-0 h-0 ml-2"></i>
+					</li> */}
 				</ul>
 				<ul className="w-1/3 flex justify-end md:w-fit">
 					<li
@@ -93,10 +103,7 @@ export default function Header() {
 						Log in →
 					</li>
 					<li className={`${isLogIn ? '' : 'md:flex'} hidden items-center`}>
-						<button
-							className="ml-2 py-3 px-5 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer"
-							onClick={() => setisLogIn(true)}
-						>
+						<button className="ml-2 py-3 px-5 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer">
 							Sign up
 						</button>
 					</li>
@@ -108,11 +115,32 @@ export default function Header() {
 				} absolute z-40 h-[calc(100vh-4.11rem)] w-full bg-gt-grey-light justify-center items-center animate-open-menu origin-top`}
 			>
 				<ul className="flex flex-col text-center gap-8 font-semibold text-b2">
-					<li className="text-gt-cyan-dark">Home</li>
-					<li>Guide</li>
-					<li>Statistics</li>
-					<li>Sprint</li>
-					<li>Audio-call</li>
+					<li className="text-gt-cyan-dark">
+						<Link href="/" onClick={() => setShowMenu(false)}>
+							Home
+						</Link>
+					</li>
+					<li>
+						<Link href="#" onClick={() => setShowMenu(false)}>
+							Courses
+						</Link>
+					</li>
+					{/* TODO: add features */}
+					{/* <li>
+						<Link href="#" onClick={() => setShowMenu(false)}>
+							Feature B
+						</Link>
+					</li>
+					<li>
+						<Link href="#" onClick={() => setShowMenu(false)}>
+							Feature C1
+						</Link>
+					</li>
+					<li>
+						<Link href="#" onClick={() => setShowMenu(false)}>
+							Feature C2
+						</Link>
+					</li> */}
 				</ul>
 			</div>
 		</nav>

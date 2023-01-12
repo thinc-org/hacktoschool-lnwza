@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Home: NextPage = () => {
 	return (
@@ -17,10 +18,12 @@ const Home: NextPage = () => {
 							Gain subject certification or earn money while teaching online
 							with GlobalTalk.
 						</p>
-						<button className="cursor-pointer text-gt-cyan-dark bg-gt-cyan-light py-3 px-5 rounded-full font-bold tracking-tight text-b3 w-fit h-fit mb-5 xl:mb-8">
-							Learn more →
-						</button>
-						<div className="flex w-72 justify-between">
+						<Link href="#">
+							<button className="cursor-pointer text-gt-cyan-dark bg-gt-cyan-light py-3 px-5 rounded-full font-bold tracking-tight text-b3 w-fit h-fit mb-5 xl:mb-8">
+								Learn more →
+							</button>
+						</Link>
+						<div className="flex w-72 justify-between xl:w-3/5">
 							<div>
 								<h1 className="font-header text-h4 xl:text-h3 tracking-tight flex items-center justify-center mb-1">
 									<Image
@@ -57,6 +60,7 @@ const Home: NextPage = () => {
 					</div>
 					<div className="flex w-11/12 max-h-min overflow-hidden relative mt-8 xl:w-[80vw] xl:overflow-visible">
 						<Image
+							loading="lazy"
 							className="w-full md:w-3/4 relative left-1/2 -translate-x-1/3 xl:left-0 xl:translate-x-0 xl:max-w-none] xl:w-[100vw]"
 							src="/img/deknoi.svg"
 							alt="deknoi"
