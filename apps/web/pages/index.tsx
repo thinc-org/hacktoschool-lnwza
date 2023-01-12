@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '../components/footer';
 import Header from '../components/header';
+import PopularCourseSlider from '../components/popularCourseSlider';
 
 const Home: NextPage = () => {
 	return (
@@ -75,6 +76,7 @@ const Home: NextPage = () => {
 						</div>
 					</div>
 				</div>
+				<PopularCourseSlider />
 			</div>
 			<Footer />
 		</>
