@@ -9,7 +9,7 @@ const Home: NextPage = () => {
 		<>
 			<Header />
 			<div className="w-screen flex flex-col">
-				<div className="w-full bg-gt-grey-light h-fit flex justify-center xl:min-h-[700px] xl:items-center">
+				<div className="w-full bg-gt-grey-light h-fit flex justify-center">
 					<div className="flex w-full max-w-7xl py-10 text-center bg-gt-grey-light overflow-x-visible flex-col items-center xl:flex-row xl:items-start xl:text-left">
 						<div className="flex flex-col w-full px-3 items-center xl:items-start md:px-5">
 							<h4 className="text-gt-cyan-dark uppercase tracking-widest font-bold text-b4 mb-2 xl:text-b2 xl:mb-6">
