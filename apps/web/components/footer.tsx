@@ -12,7 +12,7 @@ const Footer: NextComponentType = () => {
 							<Link href="/">Home</Link>
 						</li>
 						<li>
-							<Link href="#">Courses</Link>
+							<Link href="/courses">Courses</Link>
 						</li>
 						{/* TODO: add feature */}
 						{/* <li>Statistics</li>
@@ -32,7 +32,6 @@ const Footer: NextComponentType = () => {
 									className="w-6 h-6 fill-gt-grey-dark"
 									width="24"
 									height="24"
-									unoptimized
 								/>
 								Cleverse
 							</Link>
@@ -49,7 +48,6 @@ const Footer: NextComponentType = () => {
 									className="w-6 h-6"
 									width="24"
 									height="24"
-									unoptimized
 								/>
 								Thinc.
 							</Link>
@@ -65,7 +63,7 @@ const Footer: NextComponentType = () => {
 								target={'_blank'}
 							>
 								<Image
-									alt=""
+									alt="github logo"
 									src="/img/github.svg"
 									className="w-8 h-8"
 									width="32"
@@ -76,7 +74,7 @@ const Footer: NextComponentType = () => {
 						<li>
 							<Link href="#">
 								<Image
-									alt=""
+									alt="globaltalk logo"
 									src="/img/GT.svg"
 									className="w-8 h-8"
 									width="32"
@@ -87,7 +85,7 @@ const Footer: NextComponentType = () => {
 						<li>
 							<Link href="#">
 								<Image
-									alt=""
+									alt="youtube logo"
 									src="/img/youtube.svg"
 									className="w-8 h-8"
 									width="32"

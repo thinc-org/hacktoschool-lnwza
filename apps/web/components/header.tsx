@@ -44,7 +44,7 @@ const Header: NextComponentType = () => {
 						<Link href="/">Home</Link>
 					</li>
 					<li className="hidden md:flex">
-						<Link href="#">Courses</Link>
+						<Link href="/courses">Courses</Link>
 					</li>
 					{/* TODO: add features */}
 					{/* <li className="hidden md:flex">
@@ -103,9 +103,11 @@ const Header: NextComponentType = () => {
 						<Link href="http://localhost:2000/auth/login">Log in →</Link>
 					</li>
 					<li className={`${isLogIn ? '' : 'md:flex'} hidden items-center`}>
-						<button className="ml-2 py-2 px-4 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer hover:bg-white hover:text-gt-cyan-dark border-gt-cyan-dark border-4 duration-500">
-							Sign up
-						</button>
+						<Link href="#">
+							<button className="ml-2 py-2 px-4 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer hover:bg-white hover:text-gt-cyan-dark border-gt-cyan-dark border-4 duration-500">
+								Sign up
+							</button>
+						</Link>
 					</li>
 				</ul>
 			</div>
@@ -121,7 +123,7 @@ const Header: NextComponentType = () => {
 						</Link>
 					</li>
 					<li>
-						<Link href="#" onClick={() => setShowMenu(false)}>
+						<Link href="/courses" onClick={() => setShowMenu(false)}>
 							Courses
 						</Link>
 					</li>

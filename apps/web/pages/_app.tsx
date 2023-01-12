@@ -23,6 +23,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					content="width=device-width, initial-scale=1, shrink-to-fit=no"
 				/>
 				<title>GlobalTalk</title>
+				<link rel="icon" href="/img/GT.svg" />
 			</Head>
 			<style jsx global>
 				{`
