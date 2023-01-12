@@ -1,8 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { NextComponentType } from 'next/types';
 import { useState } from 'react';
 
-export default function Header() {
+const Header: NextComponentType = () => {
 	const [isLogIn, setisLogIn] = useState(true);
 	const [showMenu, setShowMenu] = useState(false);
 	const [showLogoutPopup, setshowLogoutPopup] = useState(false);
@@ -98,9 +99,8 @@ export default function Header() {
 						className={`${
 							isLogIn ? 'hidden' : 'flex'
 						} items-center font-bold text-black text-bt2 py-2 cursor-pointer`}
-						onClick={() => setisLogIn(true)}
 					>
-						Log in →
+						<Link href="http://localhost:2000/auth/login">Log in →</Link>
 					</li>
 					<li className={`${isLogIn ? '' : 'md:flex'} hidden items-center`}>
 						<button className="ml-2 py-3 px-5 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer">
@@ -145,4 +145,6 @@ export default function Header() {
 			</div>
 		</nav>
 	);
-}
+};
+
+export default Header;

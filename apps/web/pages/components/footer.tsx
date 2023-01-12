@@ -1,7 +1,8 @@
+import type { NextComponentType } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Footer() {
+const Footer: NextComponentType = () => {
 	return (
 		<footer className="w-full bg-gt-grey-light h-fit py-10 font-semibold text-gt-grey-dark">
 			<div className="w-full max-w-7xl m-auto flex flex-col gap-4 px-5 md:px-15">
@@ -103,4 +104,6 @@ export default function Footer() {
 			</div>
 		</footer>
 	);
-}
+};
+
+export default Footer;

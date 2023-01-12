@@ -2,8 +2,6 @@ import { Dela_Gothic_One, Montserrat } from '@next/font/google';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import '../styles/globals.css';
-import Footer from './components/footer';
-import Header from './components/header';
 
 const delaGothicOne = Dela_Gothic_One({
 	subsets: ['latin'],
@@ -37,9 +35,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					}
 				`}
 			</style>
-			<Header />
 			<Component {...pageProps} />
-			<Footer />
 		</>
 	);
 }
