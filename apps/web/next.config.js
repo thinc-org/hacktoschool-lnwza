@@ -3,4 +3,8 @@ module.exports = {
 	experimental: {
 		transpilePackages: ['ui'],
 	},
+	i18n: {
+		locales: ['en'],
+		defaultLocale: 'en',
+	},
 };
