@@ -17,7 +17,7 @@ export default function Footer() {
 						<li>Thinc.</li>
 					</ul>
 				</div>
-				<hr className="bg-gt-grey-light border-t-2 w-full" />
+				<hr className="bg-gt-grey-medium h-[1px] w-full" />
 				<div className="flex flex-col">
 					<ul className="flex gap-8 justify-center w-full pb-6">
 						<li>
