@@ -8,7 +8,7 @@ export default function Header() {
 
 	return (
 		<nav className="sticky top-0 w-full bg-gt-grey-light">
-			<div className="max-w-4xl m-auto bg-gt-grey-light flex items-center justify-between px-5 min-h-fit h-20 border-b-2 md:justify-between py-4 md:px-15">
+			<div className="max-w-4xl m-auto bg-gt-grey-light flex items-center justify-between px-5 min-h-fit h-20 border-b-[1px] border-b-gt-grey-medium md:justify-between py-4 md:px-15">
 				<div className="w-1/3 flex justify-start md:hidden">
 					<button
 						className={`${
