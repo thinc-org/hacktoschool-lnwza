@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import Footer from './components/footer';
-import Header from './components/header';
+import Footer from '../components/footer';
+import Header from '../components/header';
 
 const Home: NextPage = () => {
 	return (
@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 								with GlobalTalk.
 							</p>
 							<Link href="#">
-								<button className="cursor-pointer text-gt-cyan-dark bg-gt-cyan-light py-3 px-5 rounded-full font-bold tracking-tight text-b3 w-fit h-fit mb-5 xl:mb-8">
+								<button className="cursor-pointer text-gt-cyan-dark bg-gt-cyan-light py-3 px-5 rounded-full font-bold tracking-tight text-b3 w-fit h-fit mb-5 xl:mb-8 hover:bg-gt-cyan-dark hover:text-white duration-500">
 									Learn more →
 								</button>
 							</Link>
@@ -70,6 +70,7 @@ const Home: NextPage = () => {
 								alt="deknoi"
 								width="0"
 								height="0"
+								unoptimized
 							/>
 						</div>
 					</div>

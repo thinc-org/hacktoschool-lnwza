@@ -98,12 +98,12 @@ const Header: NextComponentType = () => {
 					<li
 						className={`${
 							isLogIn ? 'hidden' : 'flex'
-						} items-center font-bold text-black text-bt2 py-2 cursor-pointer`}
+						} items-center font-bold text-black text-bt2 py-2 cursor-pointer hover:text-gt-cyan-dark hover:underline duration-500`}
 					>
 						<Link href="http://localhost:2000/auth/login">Log in →</Link>
 					</li>
 					<li className={`${isLogIn ? '' : 'md:flex'} hidden items-center`}>
-						<button className="ml-2 py-3 px-5 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer">
+						<button className="ml-2 py-2 px-4 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer hover:bg-white hover:text-gt-cyan-dark border-gt-cyan-dark border-4 duration-500">
 							Sign up
 						</button>
 					</li>

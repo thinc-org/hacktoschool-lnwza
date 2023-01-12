@@ -30,8 +30,9 @@ const Footer: NextComponentType = () => {
 									alt="cleverse logo"
 									src="/img/cleverse.svg"
 									className="w-6 h-6 fill-gt-grey-dark"
-									width="0"
-									height="0"
+									width="24"
+									height="24"
+									unoptimized
 								/>
 								Cleverse
 							</Link>
@@ -46,8 +47,9 @@ const Footer: NextComponentType = () => {
 									alt="thinc logo"
 									src="/img/thinc.jpeg"
 									className="w-6 h-6"
-									width="0"
-									height="0"
+									width="24"
+									height="24"
+									unoptimized
 								/>
 								Thinc.
 							</Link>
@@ -66,8 +68,8 @@ const Footer: NextComponentType = () => {
 									alt=""
 									src="/img/github.svg"
 									className="w-8 h-8"
-									width="0"
-									height="0"
+									width="32"
+									height="32"
 								/>
 							</Link>
 						</li>
@@ -77,8 +79,8 @@ const Footer: NextComponentType = () => {
 									alt=""
 									src="/img/GT.svg"
 									className="w-8 h-8"
-									width="0"
-									height="0"
+									width="32"
+									height="32"
 								/>
 							</Link>
 						</li>
@@ -88,8 +90,8 @@ const Footer: NextComponentType = () => {
 									alt=""
 									src="/img/youtube.svg"
 									className="w-8 h-8"
-									width="0"
-									height="0"
+									width="32"
+									height="32"
 								/>
 							</Link>
 						</li>
