@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from "@nestjs/common";
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from "@nestjs/common";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { AuthModule } from "./auth/auth.module";
@@ -17,6 +22,7 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ValidateMiddleware)
+      .exclude({ path: "courses", method: RequestMethod.GET })
       .forRoutes(UsersController, CoursesController);
   }
 }
