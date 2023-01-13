@@ -1,11 +1,13 @@
-import type { NextPage } from 'next';
+import { getAuth } from 'firebase/auth';
+import type { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import Footer from '../components/footer';
 import Header from '../components/header';
 import PopularCourseSlider from '../components/popularCourseSlider';
+import { firebaseApp } from './_app';
 
-const Home: NextPage = () => {
+const Home: NextPage<{ user: any }> = ({ user }) => {
 	return (
 		<>
 			<Header />
@@ -81,6 +83,26 @@ const Home: NextPage = () => {
 			<Footer />
 		</>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+	let user = null;
+
+	try {
+		const auth = getAuth(firebaseApp);
+		await auth.currentUser?.getIdToken().then(async (idToken) => {
+			await fetch('http://localhost:2000/users', {
+				headers: {
+					'Content-type': 'application/json',
+					Authorization: `Bearer ${idToken}`,
+				},
+				method: 'GET',
+			}).then(async (response) => (user = await response.json()));
+		});
+	} catch {}
+	return {
+		props: { user },
+	};
 };
 
 export default Home;
