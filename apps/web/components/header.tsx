@@ -43,7 +43,9 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
         </div>
         <ul className="w-1/3 flex justify-center relative text-gt-grey-dark font-semibold tracking-tight gap-8 md:w-fit">
           <li className="font-header text-black font-normal cursor-pointer">
-            <Link href="/">GlobalTalk</Link>
+            <Link href="/">
+              {user?.roles === "super-admin" ? "SuperAdmin" : "GlobalTalk"}
+            </Link>
           </li>
           <li className="hidden md:flex items-center text-gt-grey-dark font-normal">
             |
