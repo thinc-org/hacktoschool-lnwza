@@ -1,4 +1,4 @@
-import { UserEntity } from 'src/users/user.entity';
+import { UserEntity } from "src/users/user.entity";
 
 export class CourseEntity {
   uid: string;

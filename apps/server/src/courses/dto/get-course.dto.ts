@@ -1,4 +1,4 @@
-import CourseEntity from '../course.entity';
+import CourseEntity from "../course.entity";
 
 export class GetCourseDto {
   course: CourseEntity;
