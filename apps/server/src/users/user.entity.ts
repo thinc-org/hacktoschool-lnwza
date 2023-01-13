@@ -1,6 +1,9 @@
-export class CreateUserDTO {
-    uid: string
+export class UserEntity {
     ouid: string
-    firstname: string
-    lastname: string
+    name: string
+    roles: string
+    photoURL: string
+    constructor(partial: Partial<UserEntity>) {
+        Object.assign(this, partial);
+    }
 }

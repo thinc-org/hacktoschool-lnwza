@@ -2,6 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
+import { CoursesController } from './courses/courses.controller';
 import { CoursesModule } from './courses/courses.module';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
@@ -14,6 +15,6 @@ import { ValidateMiddleware } from './validate.middleware';
 })
 export class AppModule implements NestModule{
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ValidateMiddleware).forRoutes(UsersController);
+    consumer.apply(ValidateMiddleware).forRoutes(UsersController, CoursesController);
   }
 }
