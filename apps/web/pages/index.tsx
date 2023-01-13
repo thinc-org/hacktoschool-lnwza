@@ -1,15 +1,15 @@
-import type { GetServerSideProps, NextPage } from 'next';
+import type { GetServerSideProps, GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import { getAuth } from 'firebase/auth';
 import { firebaseApp } from './_app';
 
-const Home: NextPage = ({ user }: { user: string }) => {
+const Home: NextPage<{ user: any }> = ({ user }) => {
 	return (
 		<div className="flex flex-col">
 			<div className="flex justify-center w-full m-auto h-[700px] bg-gt-grey-light px-[20%] overflow-x-hidden md:flex-col lg:flex-row">
 				<div className="flex flex-col w-3/5 mt-10">
 					<h4 className="font-bold text-gt-cyan-dark mb-6">
-						E-Course Platform {user}
+						E-Course Platform
 					</h4>
 					<h1 className="font-header text-h1 mb-7 tracking-tight">
 						Learning and teaching online, made easy.
@@ -84,24 +84,23 @@ const Home: NextPage = ({ user }: { user: string }) => {
 	);
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-	res.setHeader(
-		'Cache-Control',
-		'public, s-maxage=10, stale-while-revalidate=59',
-	);
+export const getServerSideProps: GetServerSideProps = async () => {
+	let user = null;
 
-	const auth = getAuth(firebaseApp);
-	const idToken = await auth.currentUser?.getIdToken();
-	await fetch('http://localhost:2000/users', {
-		headers: {
-			'Content-type': 'application/json',
-			Authorization: `Bearer ${idToken}`,
-		},
-		method: 'GET',
-	}).then((res_2) => console.log(res_2));
-
+	try {
+		const auth = getAuth(firebaseApp);
+		await auth.currentUser?.getIdToken().then(async (idToken) => {
+			await fetch('http://localhost:2000/users', {
+				headers: {
+					'Content-type': 'application/json',
+					Authorization: `Bearer ${idToken}`,
+				},
+				method: 'GET',
+			}).then(async (response) => (user = await response.json()));
+		});
+	} catch {}
 	return {
-		props: { user: 'string' },
+		props: { user },
 	};
 };
 
