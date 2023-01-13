@@ -2,8 +2,6 @@ import { Dela_Gothic_One, Montserrat } from '@next/font/google';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import '../styles/globals.css';
-import Footer from './components/footer';
-import Header from './components/header';
 import firebaseConfig from '../firebaseConfig.json';
 import { initializeApp } from 'firebase/app';
 
@@ -29,6 +27,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					content="width=device-width, initial-scale=1, shrink-to-fit=no"
 				/>
 				<title>GlobalTalk</title>
+				<link rel="icon" href="/img/GT.svg" />
 			</Head>
 			<style jsx global>
 				{`
@@ -41,9 +40,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 					}
 				`}
 			</style>
-			<Header />
 			<Component {...pageProps} />
-			<Footer />
 		</>
 	);
 }

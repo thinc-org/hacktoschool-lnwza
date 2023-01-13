@@ -39,6 +39,9 @@ module.exports = {
 				l1: ['1rem', '1.25rem'],
 				l2: ['0.875rem', '1.25rem'],
 			},
+			boxShadow: {
+				s1: '0 1.5rem 3.75rem -1rem rgba(0, 0, 0, 0.3)',
+			},
 			keyframes: {
 				'open-menu': {
 					'0%': { transform: 'scaleY(0)' },
@@ -51,5 +54,5 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/line-clamp')],
 };

@@ -1,86 +1,87 @@
-import type { GetServerSideProps, GetStaticProps, NextPage } from 'next';
-import Image from 'next/image';
 import { getAuth } from 'firebase/auth';
+import type { GetServerSideProps, NextPage } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import Footer from '../components/footer';
+import Header from '../components/header';
+import PopularCourseSlider from '../components/popularCourseSlider';
 import { firebaseApp } from './_app';
 
 const Home: NextPage<{ user: any }> = ({ user }) => {
 	return (
-		<div className="flex flex-col">
-			<div className="flex justify-center w-full m-auto h-[700px] bg-gt-grey-light px-[20%] overflow-x-hidden md:flex-col lg:flex-row">
-				<div className="flex flex-col w-3/5 mt-10">
-					<h4 className="font-bold text-gt-cyan-dark mb-6">
-						E-Course Platform
-					</h4>
-					<h1 className="font-header text-h1 mb-7 tracking-tight">
-						Learning and teaching online, made easy.
-					</h1>
-					<p className="text-b1 w-5/6 mb-8 tracking-tight font-semibold text-gt-grey-dark">
-						Practice your English and learn new things with the platform.
-					</p>
-					<button className="bg-gt-cyan-light text-gt-cyan-dark rounded-full fonr-bold w-40 h-10 mb-12 tracking-tight">
-						About Platform
-					</button>
-					<div className="flex w-2/3">
-						<div className="flex justify-center items-center flex-col">
-							<h1 className="font-bold font-header text-4xl flex items-center tracking-tight">
-								<Image
-									src="/img/bolt.svg"
-									alt=""
-									className="w-fit h-fit mr-2.5"
-									width="0"
-									height="0"
-								/>{' '}
-								600
-								<span className="text-gt-cyan-dark">+</span>
+		<>
+			<Header />
+			<div className="w-screen flex flex-col">
+				<div className="w-full bg-gt-grey-light h-fit flex justify-center">
+					<div className="flex w-full max-w-7xl py-10 text-center bg-gt-grey-light overflow-x-visible flex-col items-center xl:flex-row xl:items-start xl:text-left">
+						<div className="flex flex-col w-full px-3 items-center xl:items-start md:px-5">
+							<h4 className="text-gt-cyan-dark uppercase tracking-widest font-bold text-b4 mb-2 xl:text-b2 xl:mb-6">
+								E-Course Platform
+							</h4>
+							<h1 className="text-h3 font-header tracking-tight mb-3 xl:text-h1 xl:mb-8">
+								Learning and teaching online, made easy.
 							</h1>
-							<p className="text-b2 font-semibold text-gt-grey-dark tracking-tight">
-								Popular words
+							<p className="font-semibold text-gt-grey-dark text-b3 tracking-tight mb-5 xl:text-b1 xl:mb-8 xl:w-3/4">
+								Gain subject certification or earn money while teaching online
+								with GlobalTalk.
 							</p>
+							<Link href="#">
+								<button className="cursor-pointer text-gt-cyan-dark bg-gt-cyan-light py-3 px-5 rounded-full font-bold tracking-tight text-b3 w-fit h-fit mb-5 xl:mb-8 hover:bg-gt-cyan-dark hover:text-white duration-500">
+									Learn more →
+								</button>
+							</Link>
+							<div className="flex w-72 justify-between xl:w-3/5">
+								<div>
+									<h1 className="font-header text-h4 xl:text-h3 tracking-tight flex items-center justify-center mb-1">
+										<Image
+											src="/img/bolt.svg"
+											alt="bolt"
+											className="inline-block w-4 h-5"
+											width="12"
+											height="16"
+										/>{' '}
+										700
+										<span className="text-gt-cyan-dark">+</span>
+									</h1>
+									<p className="text-gt-grey-dark font-semibold tracking-tight text-b4 xl:text-b3 text-center">
+										Hours of Contents
+									</p>
+								</div>
+								<i className="border-l-[1px] border-gt-grey-medium flex w-0 h-4/5 m-auto pt-10"></i>
+								<div>
+									<h1 className="font-header text-h4 xl:text-h3 tracking-tight flex items-center justify-center mb-1">
+										<Image
+											src="/img/bolt.svg"
+											alt="bolt"
+											className="inline-block w-4 h-5"
+											width="12"
+											height="16"
+										/>{' '}
+										575k<span className="text-gt-cyan-dark">+</span>
+									</h1>
+									<p className="text-gt-grey-dark font-semibold tracking-tight text-b4 xl:text-b3 text-center">
+										Active Users
+									</p>
+								</div>
+							</div>
 						</div>
-						<div className="bg-gt-grey-medium w-0.5 h-3/4 m-auto"></div>
-						<div className="flex justify-center items-center flex-col">
-							<h1 className="font-bold font-header text-4xl flex items-center tracking-tight">
-								<Image
-									src="/img/controller.svg"
-									alt=""
-									className="w-fit h-fit mr-2.5"
-									width="0"
-									height="0"
-								/>{' '}
-								2<span className="text-gt-cyan-dark">+</span>
-							</h1>
-							<p className="text-b2 font-semibold text-gt-grey-dark tracking-tight">
-								Mini-games
-							</p>
+						<div className="flex w-11/12 max-h-min overflow-hidden relative mt-8 xl:w-[80vw] xl:overflow-visible">
+							<Image
+								loading="lazy"
+								className="w-full md:w-3/4 relative left-1/2 -translate-x-1/3 xl:left-0 xl:translate-x-0 xl:max-w-none] xl:w-[100vw]"
+								src="/img/deknoi.svg"
+								alt="deknoi"
+								width="0"
+								height="0"
+								unoptimized
+							/>
 						</div>
 					</div>
 				</div>
-				<Image
-					className="max-w-fit max-h-fit h-1/2 w-1/2 mt-10 mb-30"
-					src="/img/deknoi.svg"
-					alt="deknoi"
-					width="0"
-					height="0"
-				/>
+				<PopularCourseSlider />
 			</div>
-			<div className="h-[600px] w-full bg-white flex px-80 items-center gap-32">
-				<Image
-					className="w-[580px] h-[445px]"
-					src="/img/image8.svg"
-					alt=""
-					width="0"
-					height="0"
-				/>
-				<div>
-					<h2 className="text-h2 font-header mb-7 tracking-tight">
-						Learn a language in a playful way
-					</h2>
-					<p className="font-semibold text-b1 text-gt-grey-dark tracking-tight">
-						Make learning words more fun with mini-games
-					</p>
-				</div>
-			</div>
-		</div>
+			<Footer />
+		</>
 	);
 };
 
