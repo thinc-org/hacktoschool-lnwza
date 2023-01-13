@@ -62,6 +62,7 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
             </p>
           </div>
           <ul className="text-b1 tracking-tight font-semibold text-gt-grey-dark w-full flex flex-col h-96 flex-wrap">
+            <li>Total number of enrolled student: {course.students.length}</li>
             {course.students.map((student, index) => (
               <li key={student.ouid}>
                 {index + 1}. {student.name}
