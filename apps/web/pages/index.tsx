@@ -5,10 +5,14 @@ import Link from "next/link";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import PopularCourseSlider from "../components/popularCourseSlider";
-import { firebaseApp } from "./_app";
+import ICourse from "../interfaces/ICourse";
 import IUser from "../interfaces/IUser";
+import { firebaseApp } from "./_app";
 
-const Home: NextPage<{ user: IUser }> = ({ user }) => {
+const Home: NextPage<{ user: IUser; courses: ICourse[] }> = ({
+  user,
+  courses,
+}) => {
   return (
     <>
       {/* @ts-expect-error */}
@@ -27,7 +31,7 @@ const Home: NextPage<{ user: IUser }> = ({ user }) => {
                 Gain subject certification or earn money while teaching online
                 with GlobalTalk.
               </p>
-              <Link href="#">
+              <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <button className="cursor-pointer text-gt-cyan-dark bg-gt-cyan-light py-3 px-5 rounded-full font-bold tracking-tight text-b3 w-fit h-fit mb-5 xl:mb-8 hover:bg-gt-cyan-dark hover:text-white duration-500">
                   Learn more →
                 </button>
@@ -80,7 +84,8 @@ const Home: NextPage<{ user: IUser }> = ({ user }) => {
             </div>
           </div>
         </div>
-        <PopularCourseSlider />
+        {/* @ts-expect-error */}
+        <PopularCourseSlider courses={courses} />
       </div>
       <Footer />
     </>
@@ -89,6 +94,10 @@ const Home: NextPage<{ user: IUser }> = ({ user }) => {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   let user: IUser | null = null;
+  let courses: ICourse[] | null = null;
+
+  const courses_response = await fetch("http://localhost:2000/courses");
+  courses = await courses_response.json();
 
   const auth = getAuth(firebaseApp);
   await auth.currentUser?.getIdToken().then((idToken) =>
@@ -102,7 +111,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   );
 
   return {
-    props: { user },
+    props: { user, courses },
   };
 };
 
