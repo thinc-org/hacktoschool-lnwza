@@ -4,6 +4,8 @@ import { AxiosError } from "axios";
 import { catchError, firstValueFrom } from "rxjs";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
+import { HttpException } from "@nestjs/common/exceptions";
+import { HttpStatus } from "@nestjs/common/enums";
 
 @Injectable()
 export class AuthService {
@@ -31,8 +33,7 @@ export class AuthService {
       ouid: data.ouid,
       name: data.firstname + " " + data.lastname,
       roles: "instructor",
-      photoURL:
-        "https://drive.google.com/file/d/1GrJQm60gqEVVF1E4O5nl3j5T5WfMBtt8/view?usp=sharing",
+      photoURL: "https://sv1.img.in.th/UUryV3.png",
     };
     const { uid, ...user } = userData;
     const db = getFirestore();
@@ -40,6 +41,11 @@ export class AuthService {
     const userInfo = await userRef.get();
     if (!userInfo.exists) {
       userRef.set(user);
+    } else {
+      const userDb = userInfo.data();
+      if (userDb.name !== userData.name) {
+        throw new HttpException("Same uid", HttpStatus.BAD_REQUEST);
+      }
     }
     let token: string;
     await getAuth()
