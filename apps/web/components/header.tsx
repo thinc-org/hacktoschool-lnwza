@@ -54,6 +54,13 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
           <li className="hidden md:flex">
             <Link href="/courses">Courses</Link>
           </li>
+          {user?.roles === "instructor" ? (
+            <li className="hidden md:flex">
+              <Link href="/new">New Course</Link>
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
         <ul className="w-1/3 flex justify-end md:w-fit">
           <li
@@ -139,6 +146,15 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
               Courses
             </Link>
           </li>
+          {user?.roles === "instructor" ? (
+            <li>
+              <Link href="/new" onClick={() => setShowMenu(false)}>
+                New Course
+              </Link>
+            </li>
+          ) : (
+            ""
+          )}
         </ul>
       </div>
     </nav>
