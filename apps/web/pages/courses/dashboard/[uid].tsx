@@ -4,11 +4,11 @@ import { GetServerSideProps, NextPage } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Footer from "../../components/footer";
-import Header from "../../components/header";
-import ICourse from "../../interfaces/ICourse";
-import IUser from "../../interfaces/IUser";
-import { firebaseApp } from "../_app";
+import Footer from "../../../components/footer";
+import Header from "../../../components/header";
+import ICourse from "../../../interfaces/ICourse";
+import IUser from "../../../interfaces/IUser";
+import { firebaseApp } from "../../_app";
 
 const Course: NextPage<{ user: IUser; course: ICourse }> = ({
   user,
@@ -16,6 +16,7 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
 }) => {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const { uid } = router.query;
 
   useEffect(() => {
     const checkLoadingStatus = () => {
@@ -27,6 +28,12 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
     };
     setTimeout(checkLoadingStatus, 1000);
   }, []);
+
+  useEffect(() => {
+    if (user?.ouid != course?.instructor.ouid) {
+      router.replace(`/courses/${uid}`);
+    }
+  }, [user]);
 
   return (
     <>
@@ -54,41 +61,13 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
               {course?.instructor.name}
             </p>
           </div>
-          <p className="text-b3 md:text-b1 font-semibold text-gt-grey-dark">
-            {course?.description}
-          </p>
-          {user?.roles === "instructor" ? (
-            <button
-              disabled={!user || course.instructor.ouid != user.ouid}
-              className="bg-gt-green py-2 px-16 m-auto font-bold text-white text-b2 rounded-full w-fit hover:bg-white hover:text-gt-green border-gt-green border-4 duration-500 disabled:text-gt-grey-dark disabled:bg-gt-grey-light disabled:border-gt-grey-dark"
-              onClick={() => router.push(`/courses/dashboard/${course.uid}`)}
-            >
-              {course.instructor.ouid === user.ouid
-                ? "View students"
-                : "Not your course"}
-            </button>
-          ) : (
-            <button
-              // @ts-expect-error
-              disabled={
-                !user ||
-                course.students.find((student) => student.ouid == user.ouid)
-              }
-              className="bg-gt-green py-2 px-16 m-auto font-bold text-white text-b2 rounded-full w-fit hover:bg-white hover:text-gt-green border-gt-green border-4 duration-500 disabled:text-gt-grey-dark disabled:bg-gt-grey-light disabled:border-gt-grey-dark"
-              onClick={async () =>
-                await fetch("http://localhost:3000/api/enroll", {
-                  method: "POST",
-                  body: JSON.stringify(course.uid),
-                }).then(() => router.replace(router.asPath))
-              }
-            >
-              {!user
-                ? "Login First"
-                : course.students.find((student) => student.ouid == user.ouid)
-                ? "Enrolled"
-                : "Enroll"}
-            </button>
-          )}
+          <ul className="text-b1 tracking-tight font-semibold text-gt-grey-dark w-full flex flex-col h-96 flex-wrap">
+            {course.students.map((student, index) => (
+              <li key={student.ouid}>
+                {index + 1}. {student.name}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
       <Footer />
