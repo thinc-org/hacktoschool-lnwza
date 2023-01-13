@@ -84,8 +84,12 @@ const Home: NextPage<{ user: IUser; courses: ICourse[] }> = ({
             </div>
           </div>
         </div>
-        {/* @ts-expect-error */}
-        <PopularCourseSlider courses={courses} />
+        <PopularCourseSlider
+          // @ts-expect-error
+          courses={courses.sort(
+            (a, b) => b.students.length - a.students.length,
+          )}
+        />
       </div>
       <Footer />
     </>
