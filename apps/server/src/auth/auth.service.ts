@@ -4,6 +4,8 @@ import { AxiosError } from 'axios';
 import { catchError, firstValueFrom } from 'rxjs';
 import { getAuth } from 'firebase-admin/auth';
 import { getFirestore } from 'firebase-admin/firestore';
+import { HttpException } from '@nestjs/common/exceptions';
+import { HttpStatus } from '@nestjs/common/enums';
 
 @Injectable()
 export class AuthService {
@@ -40,6 +42,11 @@ export class AuthService {
     const userInfo = await userRef.get();
     if (!userInfo.exists) {
       userRef.set(user);
+    } else {
+      const userDb = userInfo.data();
+      if (userDb.name !== userData.name) {
+        throw new HttpException('Same uid', HttpStatus.BAD_REQUEST);
+      }
     }
     let token: string;
     await getAuth()
