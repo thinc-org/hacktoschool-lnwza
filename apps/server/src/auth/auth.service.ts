@@ -34,7 +34,7 @@ export class AuthService {
       name: data.firstname + ' ' + data.lastname,
       roles: 'instructor',
       photoURL:
-        'https://drive.google.com/file/d/1GrJQm60gqEVVF1E4O5nl3j5T5WfMBtt8/view?usp=sharing',
+        'https://sv1.img.in.th/UUryV3.png',
     };
     const { uid, ...user } = userData;
     const db = getFirestore();
