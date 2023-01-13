@@ -32,7 +32,7 @@ export class AuthService {
       uid: data.uid,
       ouid: data.ouid,
       name: data.firstname + " " + data.lastname,
-      roles: "instructor",
+      roles: "student",
       photoURL: "https://sv1.img.in.th/UUryV3.png",
     };
     const { uid, ...user } = userData;

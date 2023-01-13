@@ -2,7 +2,6 @@ import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
 import CourseEntity from "./course.entity";
 import { CoursesService } from "./courses.service";
 import { CreateCourseDto } from "./dto/create-course.dto";
-import { GetStudentDto } from "./dto/get-student.dto";
 
 @Controller("courses")
 export class CoursesController {
@@ -31,11 +30,4 @@ export class CoursesController {
     return await this.coursesService.enrollCourse(courseId, req['user'].uid);
   }
 
-  @Get(":courseId/students")
-  async getAllStudents(
-    @Param("courseId") courseId: string,
-    @Req() req,
-  ): Promise<GetStudentDto> {
-    return await this.coursesService.getAllStudents(courseId, req['user'].uid);
-  }
 }
