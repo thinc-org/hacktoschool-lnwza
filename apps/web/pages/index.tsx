@@ -1,13 +1,15 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';
+import { getAuth } from 'firebase/auth';
+import { firebaseApp } from './_app';
 
-const Home: NextPage = () => {
+const Home: NextPage = ({ user }: { user: string }) => {
 	return (
 		<div className="flex flex-col">
 			<div className="flex justify-center w-full m-auto h-[700px] bg-gt-grey-light px-[20%] overflow-x-hidden md:flex-col lg:flex-row">
 				<div className="flex flex-col w-3/5 mt-10">
 					<h4 className="font-bold text-gt-cyan-dark mb-6">
-						E-Course Platform
+						E-Course Platform {user}
 					</h4>
 					<h1 className="font-header text-h1 mb-7 tracking-tight">
 						Learning and teaching online, made easy.
@@ -80,6 +82,27 @@ const Home: NextPage = () => {
 			</div>
 		</div>
 	);
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+	res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=10, stale-while-revalidate=59',
+	);
+
+	const auth = getAuth(firebaseApp);
+	const idToken = await auth.currentUser?.getIdToken();
+	await fetch('http://localhost:2000/users', {
+		headers: {
+			'Content-type': 'application/json',
+			Authorization: `Bearer ${idToken}`,
+		},
+		method: 'GET',
+	}).then((res_2) => console.log(res_2));
+
+	return {
+		props: { user: 'string' },
+	};
 };
 
 export default Home;

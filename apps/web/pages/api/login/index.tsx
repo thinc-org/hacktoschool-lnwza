@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
+import { firebaseApp } from '../../_app';
 
 export default async function handler(
 	req: NextApiRequest,
@@ -6,9 +8,15 @@ export default async function handler(
 ) {
 	const ticket = req.query;
 	const requestHeaders: any = ticket;
-	console.log(requestHeaders);
-	const firebaseCustomToken = await fetch('http://localhost:2000/auth/', {
+
+	await fetch('http://localhost:2000/auth/', {
 		headers: requestHeaders,
 		method: 'GET',
+	}).then(async (firebaseCustomToken) => {
+		const token = (await firebaseCustomToken.json())['custom_token'];
+
+		const auth = getAuth(firebaseApp);
+		signInWithCustomToken(auth, token);
 	});
+	res.status(200).redirect('http://localhost:3000');
 }
