@@ -1,5 +1,4 @@
 import { Controller, Get, Req } from '@nestjs/common';
-import { UserEntity } from './user.entity';
 import { UsersService } from './users.service';
 
 @Controller('users')

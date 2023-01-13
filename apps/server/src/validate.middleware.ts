@@ -7,14 +7,18 @@ export class ValidateMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: () => void) {
     const token = req.headers.authorization;
     if (token) {
-      getAuth().verifyIdToken(token.replace('Bearer ', '')).then(decodedToken => {
-        req['user']={
-          uid: decodedToken.uid,
-        };
-        next();
-      }).catch(error=> {
-        ValidateMiddleware.accessDenied(req.url, res);
-      })
+      getAuth()
+        .verifyIdToken(token.replace('Bearer ', ''))
+        .then((decodedToken) => {
+          req['user'] = {
+            uid: decodedToken.uid,
+          };
+          next();
+        })
+        .catch((error) => {
+          console.log(error);
+          ValidateMiddleware.accessDenied(req.url, res);
+        });
     } else {
       ValidateMiddleware.accessDenied(req.url, res);
     }

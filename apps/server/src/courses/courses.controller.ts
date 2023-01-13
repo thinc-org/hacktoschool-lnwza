@@ -19,12 +19,18 @@ export class CoursesController {
   }
 
   @Get(':courseId/')
-  async getCourseInfo(@Param('courseId') courseId: string, @Req() req): Promise<GetCourseDto> {
+  async getCourseInfo(
+    @Param('courseId') courseId: string,
+    @Req() req,
+  ): Promise<GetCourseDto> {
     return await this.coursesService.getCourseInfo(courseId, req.headers.user);
   }
 
   @Get(':courseId/students')
-  async getAllStudents(@Param('courseId') courseId: string, @Req() req): Promise<GetStudentDto> {
+  async getAllStudents(
+    @Param('courseId') courseId: string,
+    @Req() req,
+  ): Promise<GetStudentDto> {
     return await this.coursesService.getAllStudents(courseId, req.headers.user);
   }
 
