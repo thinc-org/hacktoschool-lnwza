@@ -15,6 +15,8 @@ const Courses: NextPage<{ user: IUser; courses: ICourse[] }> = ({
   courses,
 }) => {
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [searchCourses, setSearchCourses] = useState(courses);
   const skeletonAmount = 15;
 
   useEffect(() => {
@@ -37,6 +39,49 @@ const Courses: NextPage<{ user: IUser; courses: ICourse[] }> = ({
           <h1 className="font-header text-h3 text-center mt-10 tracking-tight">
             Courses List
           </h1>
+          <div className="w-4/5 flex justify-center mt-10 max-w-4xl mx-auto relative">
+            <input
+              className="w-full h-fit p-2.5 border-2 rounded-lg"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder="What are you looking for..."
+              onKeyDown={(e) => {
+                if (e.key == "Enter") {
+                  if (search === "") {
+                    setSearchCourses(courses);
+                    return;
+                  }
+                  setSearchCourses(
+                    courses.filter(
+                      (course) =>
+                        course.title === search ||
+                        course.instructor.name === search ||
+                        course.description === search,
+                    ),
+                  );
+                }
+              }}
+            />
+            <button
+              className="absolute right-5 top-[50%] -translate-y-1/2 text-h4"
+              onClick={() => {
+                if (search === "") {
+                  setSearchCourses(courses);
+                  return;
+                }
+                setSearchCourses(
+                  courses.filter(
+                    (course) =>
+                      course.title === search ||
+                      course.instructor.name === search ||
+                      course.description === search,
+                  ),
+                );
+              }}
+            >
+              🔎
+            </button>
+          </div>
           <div className="flex flex-col w-full max-w-7xl py-10 px-2 gap-10 bg-gt-grey-light items-center md:flex-row md:justify-left md:w-[40rem] lg:w-[60rem] md:mx-auto md:flex-wrap">
             {loading ? (
               <>
@@ -50,7 +95,7 @@ const Courses: NextPage<{ user: IUser; courses: ICourse[] }> = ({
               </>
             ) : (
               <>
-                {courses.map((course) => (
+                {searchCourses.map((course) => (
                   <Link href={`/courses/${course.uid}`} key={course.uid}>
                     <div className="w-72 h-96 shadow-s1 tracking-tight rounded-xl flex flex-col">
                       <Image
