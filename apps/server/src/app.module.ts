@@ -24,7 +24,7 @@ export class AppModule implements NestModule {
       .apply(ValidateMiddleware)
       .exclude(
         { path: "courses", method: RequestMethod.GET },
-        { path: "courses/:courseId", method: RequestMethod.GET }
+        { path: "courses/:courseId", method: RequestMethod.GET },
       )
       .forRoutes(UsersController, CoursesController);
   }

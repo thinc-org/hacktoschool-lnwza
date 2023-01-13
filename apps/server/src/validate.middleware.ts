@@ -15,7 +15,7 @@ export class ValidateMiddleware implements NestMiddleware {
           };
           next();
         })
-        .catch((error) => {
+        .catch(() => {
           ValidateMiddleware.accessDenied(req.url, res);
         });
     } else {

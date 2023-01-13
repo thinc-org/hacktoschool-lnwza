@@ -1,6 +1,5 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable } from "@nestjs/common";
-import { AxiosError } from "axios";
 import { catchError, firstValueFrom } from "rxjs";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
@@ -22,7 +21,7 @@ export class AuthService {
           },
         })
         .pipe(
-          catchError((error: AxiosError) => {
+          catchError(() => {
             throw "An error happened!";
           }),
         ),
@@ -52,7 +51,7 @@ export class AuthService {
       .then((customToken) => {
         token = customToken;
       })
-      .catch((error) => {});
+      .catch();
     return token;
   }
 }

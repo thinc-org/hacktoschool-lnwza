@@ -3,11 +3,10 @@ import { CourseEntity } from "./course.entity";
 import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { CreateCourseDto } from "./dto/create-course.dto";
 import { UserEntity } from "src/users/user.entity";
-import * as _ from 'lodash';
+import * as _ from "lodash";
 
 @Injectable()
 export class CoursesService {
-  
   async findAll(): Promise<CourseEntity[]> {
     const coursesDoc = getFirestore().collection("courses");
     const snapshot = await coursesDoc.get();
@@ -68,18 +67,21 @@ export class CoursesService {
     const userInfo = await userRef.get();
     const newStudent = new UserEntity(userInfo.data());
     const course = new CourseEntity(courseInfo.data());
-    course.students.forEach(student => {
-      if(_.isEqual(new UserEntity(student), newStudent)) {
-        throw new HttpException("You are already enrolled!", HttpStatus.BAD_REQUEST);
+    course.students.forEach((student) => {
+      if (_.isEqual(new UserEntity(student), newStudent)) {
+        throw new HttpException(
+          "You are already enrolled!",
+          HttpStatus.BAD_REQUEST,
+        );
       }
-    })
+    });
     await courseRef.update({
       students: FieldValue.arrayUnion({
         ouid: newStudent.ouid,
         name: newStudent.name,
         roles: newStudent.roles,
         photoURL: newStudent.photoURL,
-      })
+      }),
     });
     return newStudent;
   }
