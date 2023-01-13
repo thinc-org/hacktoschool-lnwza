@@ -77,9 +77,9 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
                 height="32"
               />
             </div>
-            <span className="mr-2 text-gt-grey-dark font-semibold">
+            <p className="mr-2 text-gt-grey-dark font-semibold hidden sm:flex">
               {user?.name.split(" ")[0]}
-            </span>
+            </p>
             <i
               className="border-r-2 border-b-2 border-gt-grey-dark p-0.5 rotate-45 flex cursor-pointer md:hidden"
               onClick={() => setshowLogoutPopup(!showLogoutPopup)}
@@ -87,8 +87,11 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
             <ul
               className={`${
                 showLogoutPopup ? "flex" : "hidden"
-              } absolute right-0 top-8 w-32 px-2 h-fit py-2 bg-white border items-center pl-2 z-50`}
+              } absolute right-0 top-8 w-32 px-2 h-fit py-2 bg-white border items-center pl-2 z-50 flex-col`}
             >
+              <li className="flex items-center text-gt-grey-dark font-semibold py-2 sm:hidden">
+                <p>{user?.name.split(" ")[0]}</p>
+              </li>
               <li
                 className={`flex items-center font-bold text-black py-2 cursor-pointer`}
                 onClick={async () => {
