@@ -1,11 +1,11 @@
-import { HttpService } from '@nestjs/axios';
-import { Injectable } from '@nestjs/common';
-import { AxiosError } from 'axios';
-import { catchError, firstValueFrom } from 'rxjs';
-import { getAuth } from 'firebase-admin/auth';
-import { getFirestore } from 'firebase-admin/firestore';
-import { HttpException } from '@nestjs/common/exceptions';
-import { HttpStatus } from '@nestjs/common/enums';
+import { HttpService } from "@nestjs/axios";
+import { Injectable } from "@nestjs/common";
+import { AxiosError } from "axios";
+import { catchError, firstValueFrom } from "rxjs";
+import { getAuth } from "firebase-admin/auth";
+import { getFirestore } from "firebase-admin/firestore";
+import { HttpException } from "@nestjs/common/exceptions";
+import { HttpStatus } from "@nestjs/common/enums";
 
 @Injectable()
 export class AuthService {
@@ -13,39 +13,38 @@ export class AuthService {
   async validate(ticket: string): Promise<string> {
     const { data } = await firstValueFrom(
       this.httpService
-        .get('https://sso.thinc.in.th/serviceValidation', {
+        .get("https://sso.thinc.in.th/serviceValidation", {
           headers: {
-            DeeAppId: 'APPID',
-            DeeAppSecret: 'APPSECRET',
+            DeeAppId: "APPID",
+            DeeAppSecret: "APPSECRET",
             DeeTicket: ticket,
-            'Accept-Encoding': '*',
+            "Accept-Encoding": "*",
           },
         })
         .pipe(
           catchError((error: AxiosError) => {
             console.log(error);
-            throw 'An error happened!';
+            throw "An error happened!";
           }),
         ),
     );
     const userData = {
       uid: data.uid,
       ouid: data.ouid,
-      name: data.firstname + ' ' + data.lastname,
-      roles: 'instructor',
-      photoURL:
-        'https://sv1.img.in.th/UUryV3.png',
+      name: data.firstname + " " + data.lastname,
+      roles: "instructor",
+      photoURL: "https://sv1.img.in.th/UUryV3.png",
     };
     const { uid, ...user } = userData;
     const db = getFirestore();
-    const userRef = db.collection('users').doc(userData.uid);
+    const userRef = db.collection("users").doc(userData.uid);
     const userInfo = await userRef.get();
     if (!userInfo.exists) {
       userRef.set(user);
     } else {
       const userDb = userInfo.data();
       if (userDb.name !== userData.name) {
-        throw new HttpException('Same uid', HttpStatus.BAD_REQUEST);
+        throw new HttpException("Same uid", HttpStatus.BAD_REQUEST);
       }
     }
     let token: string;
@@ -55,7 +54,7 @@ export class AuthService {
         token = customToken;
       })
       .catch((error) => {
-        console.log('Error creating custom token:', error);
+        console.log("Error creating custom token:", error);
       });
     return token;
   }

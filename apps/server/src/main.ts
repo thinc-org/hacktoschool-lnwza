@@ -1,12 +1,12 @@
-import { NestFactory } from '@nestjs/core';
-import * as cookieParser from 'cookie-parser';
-import { AppModule } from './app.module';
+import { NestFactory } from "@nestjs/core";
+import * as cookieParser from "cookie-parser";
+import { AppModule } from "./app.module";
 
 async function bootstrap() {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const admin = require('firebase-admin');
+  const admin = require("firebase-admin");
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const serviceAccount = require('../serviceAccountKey.json');
+  const serviceAccount = require("../serviceAccountKey.json");
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
