@@ -5,8 +5,8 @@ export default async function handler(
 	res: NextApiResponse,
 ) {
 	const ticket = req.query;
-	const requestHeaders: any = { ticket };
-
+	const requestHeaders: any = ticket;
+	console.log(requestHeaders);
 	const firebaseCustomToken = await fetch('http://localhost:2000/auth/', {
 		headers: requestHeaders,
 		method: 'GET',

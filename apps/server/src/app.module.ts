@@ -12,8 +12,4 @@ import { ValidateMiddleware } from './validate.middleware';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule{
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ValidateMiddleware).forRoutes(UsersController);
-  }
-}
+export class AppModule {}

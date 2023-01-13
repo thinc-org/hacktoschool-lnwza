@@ -23,7 +23,14 @@ export class AuthService {
                 throw 'An error happened!';
         }),
     ));
-    const userData = { uid: data.uid, ouid: data.ouid, name: data.firstname+' '+data.lastname };
+    const userData = { 
+        uid: data.uid, 
+        ouid: data.ouid, 
+        name: data.firstname+' '+data.lastname,
+        roles: 'instructor',
+        photoURL: 'https://drive.google.com/file/d/1GrJQm60gqEVVF1E4O5nl3j5T5WfMBtt8/view?usp=sharing',
+
+    };
     const { uid, ...user } = userData;
     const db = getFirestore();
     const userRef = db.collection('users').doc(userData.uid);

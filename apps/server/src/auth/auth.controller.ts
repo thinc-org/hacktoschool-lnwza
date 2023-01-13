@@ -1,5 +1,5 @@
 import { Controller, Get} from '@nestjs/common';
-import { Query, Req, Res } from '@nestjs/common/decorators';
+import { Req, Res } from '@nestjs/common/decorators';
 import { HttpStatus } from '@nestjs/common/enums';
 import { HttpException } from '@nestjs/common/exceptions';
 import { AuthService } from './auth.service';
@@ -27,6 +27,6 @@ export class AuthController {
   @Get('/login')
   login(@Res() res) {
     res.status(302);
-    res.redirect('https://sso.thinc.in.th/html/login.html?service=http://localhost:3000/');
+    res.redirect('https://sso.thinc.in.th/html/login.html?service=http://localhost:3000/api/login');
   }
 }
