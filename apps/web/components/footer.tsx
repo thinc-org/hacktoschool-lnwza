@@ -14,10 +14,6 @@ const Footer: NextComponentType = () => {
             <li>
               <Link href="/courses">Courses</Link>
             </li>
-            {/* TODO: add feature */}
-            {/* <li>Statistics</li>
-						<li>Sprint</li>
-						<li>Audio-call</li> */}
           </ul>
           <ul className="gap-4 flex flex-col flex-1 md:flex-row md:justify-end md:flex-none">
             <li>
@@ -72,7 +68,7 @@ const Footer: NextComponentType = () => {
               </Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <Image
                   alt="globaltalk logo"
                   src="/img/GT.svg"
@@ -83,7 +79,7 @@ const Footer: NextComponentType = () => {
               </Link>
             </li>
             <li>
-              <Link href="#">
+              <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <Image
                   alt="youtube logo"
                   src="/img/youtube.svg"
@@ -96,7 +92,7 @@ const Footer: NextComponentType = () => {
           </ul>
           <p className="w-full text-center text-b4">
             &#169;2021 GlobalTalk. Project for{" "}
-            <Link href="#">
+            <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
               <span className="underline">GlobalTalk.</span>
             </Link>
           </p>

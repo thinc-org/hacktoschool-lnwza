@@ -54,14 +54,6 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
           <li className="hidden md:flex">
             <Link href="/courses">Courses</Link>
           </li>
-          {/* TODO: add features */}
-          {/* <li className="hidden md:flex">
-						<Link href="#">Feature B</Link>
-					</li>
-					<li className="hidden md:flex items-center">
-						<Link href="/">Feature C </Link>
-						<i className="border-r-2 border-b-2 border-gt-grey-dark p-0.5 rotate-45 flex w-0 h-0 ml-2"></i>
-					</li> */}
         </ul>
         <ul className="w-1/3 flex justify-end md:w-fit">
           <li
@@ -123,7 +115,7 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
             <Link href="http://localhost:2000/auth/login">Log in →</Link>
           </li>
           <li className={`${isLogIn ? "" : "md:flex"} hidden items-center`}>
-            <Link href="#">
+            <Link href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
               <button className="ml-2 py-2 px-4 bg-gt-cyan-dark rounded-2xl text-white text-bt2 font-bold cursor-pointer hover:bg-white hover:text-gt-cyan-dark border-gt-cyan-dark border-4 duration-500">
                 Sign up
               </button>
@@ -147,22 +139,6 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
               Courses
             </Link>
           </li>
-          {/* TODO: add features */}
-          {/* <li>
-						<Link href="#" onClick={() => setShowMenu(false)}>
-							Feature B
-						</Link>
-					</li>
-					<li>
-						<Link href="#" onClick={() => setShowMenu(false)}>
-							Feature C1
-						</Link>
-					</li>
-					<li>
-						<Link href="#" onClick={() => setShowMenu(false)}>
-							Feature C2
-						</Link>
-					</li> */}
         </ul>
       </div>
     </nav>
