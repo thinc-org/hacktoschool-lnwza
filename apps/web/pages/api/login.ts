@@ -1,6 +1,6 @@
 import { getAuth, signInWithCustomToken } from "firebase/auth";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { firebaseApp } from "../../_app";
+import { firebaseApp } from "../_app";
 
 export default async function handler(
   req: NextApiRequest,

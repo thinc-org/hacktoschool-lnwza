@@ -63,7 +63,7 @@ const PopularCourseSlider: NextComponentType = ({ courses }) => {
             </>
           ) : (
             <>
-              {courses.map((course) => (
+              {courses.map((course, index) => (
                 <Link href={`courses/${course.uid}`} key={course.uid}>
                   <div className="w-60 h-56 shadow-lg tracking-tight rounded-xl flex flex-col">
                     <Image

@@ -23,7 +23,6 @@ export class AuthService {
         })
         .pipe(
           catchError((error: AxiosError) => {
-            console.log(error);
             throw "An error happened!";
           }),
         ),
@@ -53,9 +52,7 @@ export class AuthService {
       .then((customToken) => {
         token = customToken;
       })
-      .catch((error) => {
-        console.log("Error creating custom token:", error);
-      });
+      .catch((error) => {});
     return token;
   }
 }

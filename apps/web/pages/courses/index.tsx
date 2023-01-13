@@ -15,7 +15,7 @@ const Courses: NextPage<{ user: IUser; courses: ICourse[] }> = ({
   courses,
 }) => {
   const [loading, setLoading] = useState(true);
-  const skeletonAmount = 5;
+  const skeletonAmount = 15;
 
   useEffect(() => {
     const checkLoadingStatus = () => {
@@ -50,12 +50,9 @@ const Courses: NextPage<{ user: IUser; courses: ICourse[] }> = ({
               </>
             ) : (
               <>
-                {courses.map((course, index) => (
-                  <Link href={`/courses/${course.uid}`}>
-                    <div
-                      className="w-72 h-96 shadow-s1 tracking-tight rounded-xl flex flex-col"
-                      key={index}
-                    >
+                {courses.map((course) => (
+                  <Link href={`/courses/${course.uid}`} key={course.uid}>
+                    <div className="w-72 h-96 shadow-s1 tracking-tight rounded-xl flex flex-col">
                       <Image
                         alt="card image"
                         src="/img/card-img-1.png"
@@ -76,17 +73,6 @@ const Courses: NextPage<{ user: IUser; courses: ICourse[] }> = ({
                           {course.description}
                         </p>
                       </div>
-                      <Link
-                        href=""
-                        className="mx-auto mt-auto mb-5 px-5 w-full"
-                      >
-                        <button
-                          disabled={!user}
-                          className="bg-gt-green py-2 px-16 m-auto font-bold text-white text-b2 rounded-full w-fit hover:bg-white hover:text-gt-green border-gt-green border-4 duration-500 disabled:text-gt-grey-dark disabled:bg-gt-grey-light disabled:border-gt-grey-dark"
-                        >
-                          {!user ? "Login First" : "Enroll"}
-                        </button>
-                      </Link>
                     </div>
                   </Link>
                 ))}

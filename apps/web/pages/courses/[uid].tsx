@@ -1,8 +1,13 @@
 import { Skeleton } from "@mui/material";
 import { getAuth } from "firebase/auth";
-import { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import {
+  GetServerSideProps,
+  GetStaticPaths,
+  GetStaticProps,
+  NextPage,
+} from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Footer from "../../components/footer";
 import Header from "../../components/header";
@@ -15,6 +20,7 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
   course,
 }) => {
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const checkLoadingStatus = () => {
@@ -42,8 +48,8 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
           <div className="flex items-center justify-center">
             <div className="min-w-fit min-h-fit mr-1 bg-gt-cyan-dark rounded-full relative">
               <Image
+                src={course?.instructor.photoURL ?? ""}
                 alt="profile picture"
-                src={course?.instructor.photoURL}
                 className="w-8 h-8 relative top-0 left-0"
                 width="32"
                 height="32"
@@ -56,14 +62,18 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
           <p className="text-b3 md:text-b1 font-semibold text-gt-grey-dark">
             {course?.description}
           </p>
-          <Link href="" className="flex px-5 w-full">
-            <button
-              disabled={!user}
-              className="bg-gt-green py-2 px-16 m-auto font-bold text-white text-b2 rounded-full w-fit hover:bg-white hover:text-gt-green border-gt-green border-4 duration-500 disabled:text-gt-grey-dark disabled:bg-gt-grey-light disabled:border-gt-grey-dark"
-            >
-              {!user ? "Login First" : "Enroll"}
-            </button>
-          </Link>
+          <button
+            disabled={!user}
+            className="bg-gt-green py-2 px-16 m-auto font-bold text-white text-b2 rounded-full w-fit hover:bg-white hover:text-gt-green border-gt-green border-4 duration-500 disabled:text-gt-grey-dark disabled:bg-gt-grey-light disabled:border-gt-grey-dark"
+            onClick={async () =>
+              await fetch("http://localhost:3000/api/enroll", {
+                method: "POST",
+                body: JSON.stringify(course.uid),
+              }).then(() => router.replace(router.asPath))
+            }
+          >
+            {!user ? "Login First" : "Enroll"}
+          </button>
         </div>
       )}
       <Footer />
@@ -71,11 +81,7 @@ const Course: NextPage<{ user: IUser; course: ICourse }> = ({
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: true };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const auth = getAuth(firebaseApp);
   const course_response = await fetch(
     `http://localhost:2000/courses/${params?.uid}`,
