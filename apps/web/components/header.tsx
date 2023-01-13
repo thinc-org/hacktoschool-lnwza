@@ -1,4 +1,3 @@
-import { getAuth, signOut } from "firebase/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -94,13 +93,11 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
               </li>
               <li
                 className={`flex items-center font-bold text-black py-2 cursor-pointer`}
-                onClick={async () => {
-                  const auth = getAuth();
-                  await signOut(auth);
-                  setshowLogoutPopup(false);
-                  user = null;
-                  router.replace(router.asPath);
-                }}
+                onClick={async () =>
+                  await fetch("http://localhost:3000/api/logout").then(() =>
+                    router.replace(router.asPath),
+                  )
+                }
               >
                 Sign Out →
               </li>
@@ -110,13 +107,11 @@ const Header: NextComponentType<{ user: IUser }> = ({ user }) => {
             className={`${
               isLogIn ? "md:flex" : ""
             } hidden items-center text-black py-2 font-semibold text-b2 cursor-pointer`}
-            onClick={async () => {
-              const auth = getAuth();
-              await signOut(auth);
-              setshowLogoutPopup(false);
-              user = null;
-              router.replace(router.asPath);
-            }}
+            onClick={async () =>
+              await fetch("http://localhost:3000/api/logout").then(() =>
+                router.replace(router.asPath),
+              )
+            }
           >
             Sign Out →
           </li>

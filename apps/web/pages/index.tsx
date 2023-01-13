@@ -88,20 +88,19 @@ const Home: NextPage<{ user: IUser }> = ({ user }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  let user = null;
+  let user: IUser | null = null;
 
-  try {
-    const auth = getAuth(firebaseApp);
-    await auth.currentUser?.getIdToken().then(async (idToken) => {
-      await fetch("http://localhost:2000/users", {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${idToken}`,
-        },
-        method: "GET",
-      }).then(async (response) => (user = await response.json()));
-    });
-  } catch {}
+  const auth = getAuth(firebaseApp);
+  await auth.currentUser?.getIdToken().then((idToken) =>
+    fetch("http://localhost:2000/users", {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${idToken}`,
+      },
+      method: "GET",
+    }).then(async (res) => (user = await res.json())),
+  );
+
   return {
     props: { user },
   };
