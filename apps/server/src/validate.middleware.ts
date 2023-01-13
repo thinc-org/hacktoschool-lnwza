@@ -5,9 +5,9 @@ import { getAuth } from 'firebase-admin/auth';
 @Injectable()
 export class ValidateMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: () => void) {
-    const token = req.cookies['IdToken'];
+    const token = req.headers.authorization;
     if (token) {
-      getAuth().verifyIdToken(token).then(decodedToken => {
+      getAuth().verifyIdToken(token.replace('Bearer ', '')).then(decodedToken => {
         req['user']={
           uid: decodedToken.uid,
         };
