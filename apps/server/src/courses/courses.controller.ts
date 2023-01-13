@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
+import CourseEntity from "./course.entity";
 import { CoursesService } from "./courses.service";
 import { CreateCourseDto } from "./dto/create-course.dto";
-import { GetCourseDto } from "./dto/get-course.dto";
 import { GetStudentDto } from "./dto/get-student.dto";
 
 @Controller("courses")
@@ -15,15 +15,20 @@ export class CoursesController {
 
   @Post()
   async create(@Req() req, @Body() createCourseDto: CreateCourseDto) {
-    return await this.coursesService.create(req["user"].uid, createCourseDto);
+    return await this.coursesService.create(req['users'].uid, createCourseDto);
   }
 
   @Get(":courseId/")
   async getCourseInfo(
     @Param("courseId") courseId: string,
-    @Req() req,
-  ): Promise<GetCourseDto> {
-    return await this.coursesService.getCourseInfo(courseId, req["user"].uid);
+  ): Promise<CourseEntity> {
+    return await this.coursesService.getCourseInfo(courseId);
+  }
+
+  @Post(":courseId")
+  async enrollCourse(@Param("courseId") courseId: string, @Req() req) {
+    console.log('ok')
+    return await this.coursesService.enrollCourse(courseId, req['users'].uid);
   }
 
   @Get(":courseId/students")
@@ -31,11 +36,6 @@ export class CoursesController {
     @Param("courseId") courseId: string,
     @Req() req,
   ): Promise<GetStudentDto> {
-    return await this.coursesService.getAllStudents(courseId, req["user"].uid);
-  }
-
-  @Post(":courseId")
-  async enrollCourse(@Param("courseId") courseId: string, @Req() req) {
-    return await this.coursesService.enrollCourse(courseId, req["user"].uid);
+    return await this.coursesService.getAllStudents(courseId, req['users'].uid);
   }
 }

@@ -1,13 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { CourseEntity } from "./course.entity";
-import { getFirestore } from "firebase-admin/firestore";
+import { FieldValue, getFirestore } from "firebase-admin/firestore";
 import { CreateCourseDto } from "./dto/create-course.dto";
-import { GetCourseDto } from "./dto/get-course.dto";
 import { GetStudentDto } from "./dto/get-student.dto";
 import { UserEntity } from "src/users/user.entity";
+import * as _ from 'lodash';
 
 @Injectable()
 export class CoursesService {
+  
   async findAll(): Promise<CourseEntity[]> {
     const coursesDoc = getFirestore().collection("courses");
     const snapshot = await coursesDoc.get();
@@ -48,21 +49,14 @@ export class CoursesService {
     return course;
   }
 
-  async getCourseInfo(courseId: string, uid: string): Promise<GetCourseDto> {
+  async getCourseInfo(courseId: string): Promise<CourseEntity> {
     const courseRef = getFirestore().collection("courses").doc(courseId);
     const courseInfo = await courseRef.get();
     if (!courseInfo.exists) {
       throw new HttpException("Bad request", HttpStatus.BAD_REQUEST);
     }
-    const userRef = getFirestore().collection("users").doc(uid);
-    const userInfo = await userRef.get();
-    const student = new UserEntity(userInfo.data());
     const course = new CourseEntity(courseInfo.data());
-    let enrolled = false;
-    if (course.students.indexOf(student) >= 0) {
-      enrolled = true;
-    }
-    return new GetCourseDto(course, enrolled);
+    return course;
   }
 
   async enrollCourse(courseId: string, uid: string) {
@@ -73,17 +67,22 @@ export class CoursesService {
     }
     const userRef = getFirestore().collection("users").doc(uid);
     const userInfo = await userRef.get();
-    const student = new UserEntity(userInfo.data());
+    const newStudent = new UserEntity(userInfo.data());
     const course = new CourseEntity(courseInfo.data());
-    if (course.students.indexOf(student) >= 0) {
-      throw new HttpException("You already enrolled!", HttpStatus.BAD_REQUEST);
-    }
-    const newStudents: UserEntity[] = courseInfo.data().students;
-    newStudents.push(student);
+    course.students.forEach(student => {
+      if(_.isEqual(new UserEntity(student), newStudent)) {
+        throw new HttpException("You are already enrolled!", HttpStatus.BAD_REQUEST);
+      }
+    })
     await courseRef.update({
-      students: JSON.stringify(newStudents),
+      students: FieldValue.arrayUnion({
+        ouid: newStudent.ouid,
+        name: newStudent.name,
+        roles: newStudent.roles,
+        photoURL: newStudent.photoURL,
+      })
     });
-    return newStudents;
+    return newStudent;
   }
 
   async getAllStudents(courseId: string, uid: string): Promise<GetStudentDto> {

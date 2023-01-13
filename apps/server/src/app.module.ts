@@ -22,7 +22,10 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(ValidateMiddleware)
-      .exclude({ path: "courses", method: RequestMethod.GET })
+      .exclude(
+        { path: "courses", method: RequestMethod.GET },
+        { path: "courses/:courseId", method: RequestMethod.GET }
+      )
       .forRoutes(UsersController, CoursesController);
   }
 }
