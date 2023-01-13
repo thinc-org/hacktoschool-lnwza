@@ -94,6 +94,11 @@ export class CoursesService {
     if (!courseInfo.exists || role !== "instructor") {
       throw new HttpException("Bad request", HttpStatus.BAD_REQUEST);
     }
+    const user = new UserEntity(userInfo.data());
+    const instructor = new UserEntity(courseInfo.data().instructor);
+    if (!(_.isEqual(user, instructor))) {
+      throw new HttpException("You are not instructor!", HttpStatus.BAD_REQUEST);
+    }
     const course = new CourseEntity(courseInfo.data());
     return new GetStudentDto(course.instructor, course.students);
   }
