@@ -15,7 +15,7 @@ export class CoursesController {
 
   @Post()
   async create(@Req() req, @Body() createCourseDto: CreateCourseDto) {
-    return await this.coursesService.create(req['users'].uid, createCourseDto);
+    return await this.coursesService.create(req['user'].uid, createCourseDto);
   }
 
   @Get(":courseId/")
@@ -28,7 +28,7 @@ export class CoursesController {
   @Post(":courseId")
   async enrollCourse(@Param("courseId") courseId: string, @Req() req) {
     console.log('ok')
-    return await this.coursesService.enrollCourse(courseId, req['users'].uid);
+    return await this.coursesService.enrollCourse(courseId, req['user'].uid);
   }
 
   @Get(":courseId/students")
@@ -36,6 +36,6 @@ export class CoursesController {
     @Param("courseId") courseId: string,
     @Req() req,
   ): Promise<GetStudentDto> {
-    return await this.coursesService.getAllStudents(courseId, req['users'].uid);
+    return await this.coursesService.getAllStudents(courseId, req['user'].uid);
   }
 }
