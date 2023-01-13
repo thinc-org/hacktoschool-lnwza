@@ -7,4 +7,13 @@ module.exports = {
 		locales: ['en'],
 		defaultLocale: 'en',
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'sv1.img.in.th',
+				pathname: '/**',
+			},
+		],
+	},
 };

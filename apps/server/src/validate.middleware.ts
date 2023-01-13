@@ -1,6 +1,6 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
-import { Request, Response } from 'express';
-import { getAuth } from 'firebase-admin/auth';
+import { Injectable, NestMiddleware } from "@nestjs/common";
+import { Request, Response } from "express";
+import { getAuth } from "firebase-admin/auth";
 
 @Injectable()
 export class ValidateMiddleware implements NestMiddleware {
@@ -8,9 +8,9 @@ export class ValidateMiddleware implements NestMiddleware {
     const token = req.headers.authorization;
     if (token) {
       getAuth()
-        .verifyIdToken(token.replace('Bearer ', ''))
+        .verifyIdToken(token.replace("Bearer ", ""))
         .then((decodedToken) => {
-          req['user'] = {
+          req["user"] = {
             uid: decodedToken.uid,
           };
           next();
@@ -28,7 +28,7 @@ export class ValidateMiddleware implements NestMiddleware {
       statusCode: 403,
       timestamp: new Date().toISOString(),
       path: url,
-      message: 'access denied',
+      message: "access denied",
     });
   }
 }
