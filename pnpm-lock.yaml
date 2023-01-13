@@ -5,8 +5,11 @@ importers:
   .:
     specifiers:
       eslint-config-custom: workspace:*
+      firebase: ^9.15.0
       prettier: latest
       turbo: latest
+    dependencies:
+      firebase: 9.15.0
     devDependencies:
       eslint-config-custom: link:packages/eslint-config-custom
       prettier: 2.8.2

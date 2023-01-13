@@ -4,6 +4,8 @@ import Head from 'next/head';
 import '../styles/globals.css';
 import Footer from './components/footer';
 import Header from './components/header';
+import firebaseConfig from '../firebaseConfig.json';
+import { initializeApp } from 'firebase/app';
 
 const delaGothicOne = Dela_Gothic_One({
 	subsets: ['latin'],
@@ -15,6 +17,8 @@ const delaGothicOne = Dela_Gothic_One({
 const montserrat = Montserrat({
 	subsets: ['latin'],
 });
+
+export const firebaseApp = initializeApp(firebaseConfig);
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	return (

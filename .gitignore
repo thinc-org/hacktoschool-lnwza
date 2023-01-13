@@ -31,3 +31,7 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+# firebase secret
+serviceAccountKey.json
+firebaseConfig.json
